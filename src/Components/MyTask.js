@@ -10,7 +10,7 @@ const MyTask = () => {
   const [user] = useAuthState(auth)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/todos?email=${user?.email}`,{
+    fetch(`https://shielded-cove-74968.herokuapp.com/todos?email=${user?.email}`,{
         method: 'GET',
         headers: {
             'authorization': `bearer ${localStorage.getItem('accessToken')}`

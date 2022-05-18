@@ -12,7 +12,7 @@ const SocialLogin = () => {
     
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
-  const [token] = useToken(gUser)
+  const [token] = useToken(user)
 
   useEffect(()=>{
     if (token) {

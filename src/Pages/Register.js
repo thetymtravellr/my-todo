@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import SocialLogin from "../Components/SocialLogin";
 import auth from "../firebase.init";
 import useToken from "../hooks/useToken";
 
@@ -21,7 +20,9 @@ const Register = () => {
   
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-  const [token] = useToken(user || emailUser)
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+  const [token] = useToken(emailUser || gUser)
 
   const { register, handleSubmit } = useForm();
   
@@ -39,11 +40,11 @@ const Register = () => {
     console.log(error);
   }
 
-useEffect(()=>{
-  if (token) {
-    navigate(from,{ replace: true });
-  }
-},[token,from,navigate])
+  useEffect(()=>{
+    if (token) {
+      navigate(from,{ replace: true });
+    }
+  },[token,from,navigate])
 
   return (
     <div className="min-h-screen grid items-center">
@@ -109,7 +110,8 @@ useEffect(()=>{
         <div className="divider">OR</div>
         <div className="w-full flex flex-col justify-center items-center">
           
-          <SocialLogin></SocialLogin>
+        <p className="mb-4 text-center text-sm">Continue With</p>
+        <button className="bg-primary w-full max-w-xs mx-auto py-2 text-base-100 font-semibold rounded" onClick={() => signInWithGoogle()}>Google</button>
         </div>
       </div>
     </div>

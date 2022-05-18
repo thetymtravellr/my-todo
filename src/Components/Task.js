@@ -9,7 +9,7 @@ const Task = ({ task }) => {
 
     const handleCompleted = id => {
         console.log(id);
-        fetch(`http://localhost:5000/todos/${id}`,{
+        fetch(`https://shielded-cove-74968.herokuapp.com/todos/${id}`,{
         method: 'PUT'
     })
     .then(res => res.json())
@@ -23,7 +23,7 @@ const Task = ({ task }) => {
 
     const handleDelete = id => {
         console.log(id);
-        fetch(`http://localhost:5000/todos/${id}`,{
+        fetch(`https://shielded-cove-74968.herokuapp.com/todos/${id}`,{
         method: 'DELETE'
     })
     .then(res => res.json())
