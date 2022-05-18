@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useAuthState, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "../Components/SocialLogin";
 import auth from "../firebase.init";
 import useToken from "../hooks/useToken";
 
@@ -17,10 +18,8 @@ const Login = () => {
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
-    
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
-  const [token] = useToken(emailUser || gUser)
+  const [token] = useToken(user)
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -73,8 +72,7 @@ const Login = () => {
       </form>
 
       <div className="divider">OR</div>
-      <p className="mb-4 text-center text-sm">Continue With</p>
-        <button className="bg-primary w-full max-w-xs mx-auto py-2 text-base-100 font-semibold rounded" onClick={() => signInWithGoogle()}>Google</button>
+      <SocialLogin></SocialLogin>
       </div>
     </div>
   );

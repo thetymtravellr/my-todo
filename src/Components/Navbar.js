@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import auth from "../firebase.init";
 
 const Navbar = () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
     >
       <div className={`flex justify-between items-center py-4 px-4 max-w-7xl mx-auto font-medium `}>
       <div>
-        <h1 className="text-2xl">My Todo's</h1>
+        <Link to='/'><h1 className="text-2xl">My Todo's</h1></Link>
       </div>
       <nav>
         <ul className="flex space-x-2">
@@ -30,6 +30,9 @@ const Navbar = () => {
             user ?
             <>
             <li>
+      <Link to='/'>Home</Link>
+          </li>
+          <li>
       <label htmlFor='add-task-modal' className=" modal-button cursor-pointer">Add Task</label>
           </li>
           <li>
